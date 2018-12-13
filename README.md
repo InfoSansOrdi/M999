@@ -1,4 +1,4 @@
-* M999, le processeur débranché
+# M999, le processeur débranché
 
 L'objectif de cet activité est de montrer le fonctionnement d'un
 processeur. Le matériel est constitué d'une feuille A3 à plastifier
@@ -63,3 +63,15 @@ sur la pile, et de faire des appels de sous-fonctions.
   - 7: POP  A { ADD r5 r1 ; MOVE @r5 A }
   - 8: CALL A { MOVE PC @r5 ; SUB r5 r1 ; MOVE A PC } 
   - 9: RET    { ADD r5 r1 ; MOVE @r5 PC }
+
+# Des projets comparables, et autres liens
+
+ * [https://www.cs.drexel.edu/~bls96/museum/cardiac.html](CARDboard
+   Illustrative Aid to Computation), un processeur en carton des
+   années 80.
+   - [http://www.pythondiary.com/blog/Oct.15,2014/building-cpu-simulator-python.html](Un
+     simulateur en Python de la chose).
+   - [http://www.drdobbs.com/embedded-systems/paper-to-fpga/240155922?pgno=1](Une
+     implémentation FPGA).
+ * [https://en.wikipedia.org/wiki/Little_man_computer](Little Man
+   Computer), un autre processeur en carton d'un autre âge.
