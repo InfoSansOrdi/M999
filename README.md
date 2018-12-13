@@ -66,12 +66,11 @@ sur la pile, et de faire des appels de sous-fonctions.
 
 # Des projets comparables, et autres liens
 
- * [https://www.cs.drexel.edu/~bls96/museum/cardiac.html](CARDboard
-   Illustrative Aid to Computation), un processeur en carton des
+ * (https://www.cs.drexel.edu/~bls96/museum/cardiac.html)[CARDboard Illustrative Aid to Computation], un processeur en carton des
    années 80.
-   - [http://www.pythondiary.com/blog/Oct.15,2014/building-cpu-simulator-python.html](Un
-     simulateur en Python de la chose).
-   - [http://www.drdobbs.com/embedded-systems/paper-to-fpga/240155922?pgno=1](Une
-     implémentation FPGA).
- * [https://en.wikipedia.org/wiki/Little_man_computer](Little Man
-   Computer), un autre processeur en carton d'un autre âge.
+   - (http://www.pythondiary.com/blog/Oct.15,2014/building-cpu-simulator-python.html)[Un
+     simulateur en Python de la chose].
+   - (http://www.drdobbs.com/embedded-systems/paper-to-fpga/240155922?pgno=1)[Une
+     implémentation FPGA].
+ * (https://en.wikipedia.org/wiki/Little_man_computer)[Little Man
+   Computer], un autre processeur en carton d'un autre âge.
