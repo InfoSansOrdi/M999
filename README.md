@@ -1,12 +1,12 @@
 # M999, le processeur débranché
 
-L'objectif de cet activité est de montrer le fonctionnement d'un
+L'objectif de cette activité est de montrer le fonctionnement d'un
 processeur. Le matériel est constitué d'une feuille A3 à plastifier
 pour représenter les cases de la mémoire, plus un décodeur d'opcode à
 découper, avec des tirettes.
 
 La mémoire est composée de 100 cases, auxquelles s'ajoutent 6
-registres génériques (nommés de r0 à r5) et un registre d'instruction
+registres génériques (nommés de r0 à r5) et un registre pointeur d'instruction
 PC dénotant la case mémoire de la prochaine instruction à exécuter.
 Les deux premiers registres ne sont pas modifiables : la valeur de r0
 est fixée à 0, et celle de r1 est fixée à 1. Au final, seuls les
@@ -42,14 +42,14 @@ Dans la version simplifiée, le M999 dispose des 6 instructions
 suivantes:
 
   - 0: HALT: la machine s'arrête
-  - 1: MOVE A B: Move la valeur de B dans A
+  - 1: MOVE A B: Copie la valeur de B dans A
     - Si AB est de forme @ri rj, c'est un STORE: registre vers mémoire
       Exemple: 163 écrit la valeur de r3 dans la case pointée par r2
-    - Si BA est de forme ri @rj, c'est un LOAD: mémoire vers registre
+    - Si AB est de forme ri @rj, c'est un LOAD: mémoire vers registre
       Exemple: 136 charge dans r3 la case mémoire dont l'adresse est dans r2.
-    - Les autres formes n'ont pas de nom habituel en asm (je crois).
+    - Les autres formes n'ont pas de nom particulier en asm (je crois).
   - 2: ADD A B: Ajoute la valeur de B dans A
-  - 3: SUB A B: Soustrait la valeur de B à l'adresse A
+  - 3: SUB A B: Soustrait la valeur de B à A
   - 4: JPNZ A B: Jump en B si A est différent de 0
   - 5: JPP A B: Jump en B si A est positif
   
