@@ -7,8 +7,8 @@ découper, avec des tirettes.
 
 Plusieurs variantes de M999 sont proposées.
 
-* _M999 "registres"_ dans laquelle les opérandes des instrcutions sont
-excusivent des
+* _M999 "registres"_ dans laquelle les opérandes des instructions sont
+exclusivement des
 * _M999a_ qui utilise un accumulateur
 
 
@@ -66,7 +66,7 @@ suivantes:
   - 5: JPP A B: Jump en B si A est positif
   
 Une version étendue permet de faire des appels de fonctions. Dans ce
-cas, le registre 5 n'est plus générique. Il stoque le sommet de pile
+cas, le registre 5 n'est plus générique. Il stocke le sommet de pile
 (valeur initiale: 99). On dispose alors des quatre instructions
 supplémentaires suivantes permettant d'empiler/dépiler des paramètres
 sur la pile, et de faire des appels de sous-fonctions.
@@ -90,7 +90,7 @@ codées sur 2 chiffres.
 
 Cette mémoire va contenir données et instructions.
 
-Le processeur dispose de deux registres géénraux A et B, et d'un
+Le processeur dispose de deux registres généraux A et B, et d'un
 registre accumulateur/résultat R.
 
 Comme la mémoire, ces registres sont de 3 chiffres, et contiennent donc
@@ -100,15 +100,15 @@ Le processeur dispose aussi d'un registre pointeur d'instruction PC
 contenant l'adresse mémoire de la prochaine instruction à exécuter.
 
 La mémoire et les registres peuvent être matérialisés par une grille
-de 10*10 et des cases supplémentaires pour les regsites A, B, R.
+de 10*10 et des cases supplémentaires pour les registres A, B, R.
 
 Le registre PC peut être matérialisé par un "pion" situé sur une des
 cases de la grille mémoire.
 
-Unité aritmétique et logique
+Unité arithmétique et logique
 ----------------------------
 
-L'unité aritmétique et logique – AUL – est en charge d'effectuer les
+L'unité arithmétique et logique – UAL – est en charge d'effectuer les
 calculs. Les opérandes et résultats sont dans les registres, A et
 B pour les opérandes, R pour le résultat.
 
@@ -117,7 +117,7 @@ Unité de commande
 
 L'unité de commande pilote l'ordinateur.
 
-Son cycle de fonctionement comporte 3 étapes :
+Son cycle de fonctionnement comporte 3 étapes :
 
 1. charger l'instruction depuis la mémoire pointée par PC.
    Incrémenter PC.
@@ -155,7 +155,7 @@ valeur | registre
 
 La machine stoppe si le pointeur d'instruction vaut 99.
 
-On peut donc utiliser le mnémonique `HLT`comem synonyme de `JMP 99`.
+On peut donc utiliser le mnémonique `HLT` comme synonyme de `JMP 99`.
 
 ### Entrées/sorties
 
