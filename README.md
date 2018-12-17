@@ -151,7 +151,9 @@ valeur | registre
 1 | B
 2 | R
 
-### Arrêt
+### Boot et arrêt
+
+La machine débute avec la valeur nulle comme pointeur d'instruction.
 
 La machine stoppe si le pointeur d'instruction vaut 99.
 
