@@ -8,7 +8,7 @@ découper, avec des tirettes.
 Plusieurs variantes de M999 sont proposées.
 
 * _M999 "registres"_ dans laquelle les opérandes des instructions sont
-exclusivement des
+exclusivement des registres
 * _M999a_ qui utilise un accumulateur
 
 
@@ -171,7 +171,7 @@ valeur | registre
 
 ### Boot et arrêt
 
-La machine débute avec la valeur nulle comme pointeur d'instruction.
+La machine démarre avec la valeur nulle comme pointeur d'instruction.
 
 La machine stoppe si le pointeur d'instruction vaut 99.
 
@@ -181,10 +181,9 @@ On peut donc utiliser le mnémonique `HLT` comme synonyme de `JMP 99`.
 
 Les entrées/sortries sont "mappées" en mémoire.
 
-Modifier la valeur du mot mémoire 99 écrit sur le terminal.
+Écrire le mot mémoire 99 écrit sur le terminal.
 
-Une valeur saisie sur le terminal pourra être lue dans le mot mémoire
-99.
+Les valeurs saisies sur le terminal seront lues dans le mot mémoire 99.
 
 ------------------------------------------------------------
 
