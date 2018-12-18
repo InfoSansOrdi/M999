@@ -55,7 +55,7 @@ Instr | Mnémonique | Signification
 Le M999 dispose des 10 instructions suivantes:
 
 Instr | Mnémonique | Signification
-----------------------------------
+----- | ---------- | -------------
   0   | HALT       | La machine s'arrête
   1   | MOVE A B   | Copie la valeur de B dans A
   2   | ADD A B    | Ajoute la valeur de B dans A
