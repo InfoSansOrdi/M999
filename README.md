@@ -39,42 +39,60 @@ l'opérande A tandis que le chiffre des unités est l'opérande B.
 Voici la signification des différentes valeurs possibles pour les
 opérandes :
 
-  - 0: r0 (valeur du registre 0, qui est fixée à 0 par définition)
-  - 1: r1 (valeur du registre 1, qui est fixée à 1 par définition)
-  - 2: r2 (valeur du registre 2, qui change)
-  - 3: r3
-  - 4: r4
-  - 5: r5
-  - 6: @r2 (mémoire centrale, dans la case pointée par r2)
-  - 7: @r3
-  - 8: @r4
-  - 9: @r5
+Instr | Mnémonique | Signification
+----- | ---------- | -------------
+  0   | r0         | Valeur du registre 0 (fixée à 0 par définition)
+  1   | r1         | Valeur du registre 1 (fixée à 1 par définition)
+  2   | r2         | Valeur du registre 2 (qui change)
+  3   | r3         |
+  4   | r4         |
+  5   | r5         |
+  6   | @r2        | Case de la mémoire centrale pointée par r2
+  7   | @r3        |
+  8   | @r4        |
+  9   | @r5        |
 
-Dans la version simplifiée, le M999 dispose des 6 instructions
-suivantes:
+Le M999 dispose des 10 instructions suivantes:
 
-  - 0: HALT: la machine s'arrête
-  - 1: MOVE A B: Copie la valeur de B dans A
-    - Si AB est de forme @ri rj, c'est un STORE: registre vers mémoire
-      Exemple: 163 écrit la valeur de r3 dans la case pointée par r2
-    - Si AB est de forme ri @rj, c'est un LOAD: mémoire vers registre
-      Exemple: 136 charge dans r3 la case mémoire dont l'adresse est dans r2.
-    - Les autres formes n'ont pas de nom particulier en asm (je crois).
-  - 2: ADD A B: Ajoute la valeur de B dans A
-  - 3: SUB A B: Soustrait la valeur de B à A
-  - 4: JPNZ A B: Jump en B si A est différent de 0
-  - 5: JPP A B: Jump en B si A est positif
+Instr | Mnémonique | Signification
+----------------------------------
+  0   | HALT       | La machine s'arrête
+  1   | MOVE A B   | Copie la valeur de B dans A
+  2   | ADD A B    | Ajoute la valeur de B dans A
+  3   | SUB A B    | Soustrait la valeur de B à A
+  4   | JPNZ A B   | Jump en B si A est différent de 0
+  5   | JPP A B    | Jump en B si A est positif
+  6   | LOAD2 A    | Écrit la valeur A (comprise entre 0 et 99) dans r2
+  7   | LOAD3 A    | Écrit la valeur A dans r3
+  8   | LOAD4 A    | Écrit la valeur A dans r4
+  9   | LOAD5 A    | Écrit la valeur A dans r5
   
-Une version étendue permet de faire des appels de fonctions. Dans ce
-cas, le registre 5 n'est plus générique. Il stocke le sommet de pile
-(valeur initiale: 99). On dispose alors des quatre instructions
-supplémentaires suivantes permettant d'empiler/dépiler des paramètres
-sur la pile, et de faire des appels de sous-fonctions.
+_MOVE A B_ peut représenter un STORE copiant le contenu d'un registre
+vers la mémoire si on utilise _MOVE @ri rj_.  Par exemple l'opcode 163
+écrit la valeur de r3 dans la case mémoire pointée par r2. Cette même
+instruction peut représenter un LOAD effectuant le mouvement mémoire
+inverse, de la mémoire vers les registres. Par exemple, 136 (MOVE r3
+@r2) copie le contenu du registre 3 vers la case mémoire pointée par r2.
 
-  - 6: PUSH A { MOVE A @r5 ; SUB r5 r1 }
-  - 7: POP  A { ADD r5 r1 ; MOVE @r5 A }
-  - 8: CALL A { MOVE PC @r5 ; SUB r5 r1 ; MOVE A PC } 
-  - 9: RET    { ADD r5 r1 ; MOVE @r5 PC }
+Extension "fonctions"
+---------------------
+
+Cette extension n'est pas vraiment destinée à être utilisée pour
+l'instant. C'est une idée pour le futur.
+
+On pourrait imaginer une extension permettant de faire des appels de
+fonctions. Dans ce cas, le registre 5 n'est plus générique. Il stocke
+le sommet de pile (valeur initiale: 99). On aurait alors besoin des
+quatre instructions supplémentaires suivantes permettant
+d'empiler/dépiler des paramètres sur la pile, et de faire des appels
+de sous-fonctions. Soit la partie instruction de l'opcode n'est plus
+décimale mais hexadecimale, soit on économise certaines instructions
+LOAD du jeu de base.
+
+  - PUSH A { MOVE A @r5 ; SUB r5 r1 }
+  - POP  A { ADD r5 r1 ; MOVE @r5 A }
+  - CALL A { MOVE PC @r5 ; SUB r5 r1 ; MOVE A PC } 
+  - RET    { ADD r5 r1 ; MOVE @r5 PC }
 
 ------------------------------------------------------------
 
