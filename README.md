@@ -24,11 +24,11 @@ Les deux premiers registres ne sont pas modifiables : la valeur de r0
 est fixée à 0, et celle de r1 est fixée à 1. Au final, seuls les
 registres r2 à r5 sont disponibles pour le programmeur.
 
-Les deux cases mémoires 0 et 1 sont particulières car elles servent
-aux I/O. Les lectures dans la case 0 correspondent à des entrées
-clavier tandis que les écritures dans la case 1 correspondent à des
-écritures à l'écran. On ne peut pas écrire dans la case 0 ni lire dans
-la case 1.
+Les deux cases mémoires 98 et 99 sont particulières car elles servent
+aux I/O. Les lectures dans la case 98 correspondent à des entrées
+clavier tandis que les écritures dans la case 99 correspondent à des
+écritures à l'écran. On ne peut pas écrire dans la case 98 ni lire dans
+la case 99.
 
 Les autres cases mémoire peuvent contenir un nombre décimal de 000 à
 999, qui représente soit une donnée arbitraire, soit un opcode
