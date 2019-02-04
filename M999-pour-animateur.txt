@@ -1,0 +1,159 @@
+
+Ce document vient en accompagnement de la feuille M999-mémoire, qui
+est à distribuer à tous les participants.
+
+Présentation de la M999
+=======================
+
+La M999 est une machine dotée de 100 cases mémoire (la grille en haut
+de la feuille), et d'un processeur (en bas de la feuille).
+
+La mémoire est composée de 100 mots mémoire de 3 chiffres (valeur de
+000 à 999). Ces 100 mots mémoire sont adressables par des adresses
+codées sur 2 chiffres. Cette mémoire va contenir données et instructions.
+
+Le processeur dispose de deux registres généraux nommés A et B, et
+d'un registre accumulateur/résultat nommé R.
+
+Comme la mémoire, ces registres sont de 3 chiffres, et contiennent donc
+des valeurs entre 0 et 999.
+
+Le processeur dispose aussi d'un registre pointeur d'instruction PC
+contenant l'adresse mémoire de la prochaine instruction à exécuter.
+Bien qu'on puisse écrire le registre PC dans la case mémoire prévue à
+cet effet, il est plus pratique de le matérialiser avec un "pion"
+situé sur une des cases de la grille mémoire, ou même de suivre avec
+son doigt.
+
+Unité arithmétique et logique
+----------------------------
+
+L'unité arithmétique et logique – UAL – est en charge d'effectuer les
+calculs. Les opérandes et résultats sont dans les registres, A et
+B pour les opérandes, R pour le résultat.
+
+Unité de commande
+-----------------
+
+L'unité de commande pilote l'ordinateur.
+
+Son cycle de fonctionnement comporte 3 étapes :
+
+1. charger l'instruction depuis la mémoire pointée par PC.
+   Incrémenter PC.
+2. décoder l'instruction : à partir des 3 chiffres codant
+   l'instruction, identifier quelle est l’opération à réaliser,
+   quelles sont les opérandes.
+3. exécuter l'instruction.
+
+
+Jeu d'instruction
+-----------------
+
+op0 op1 op2 | mnémonique | instruction à réaliser
+----------- | ---------- | ----------------------
+0 x y       | `STR xy`   | copie le contenu du registre R dans le mot mémoire d'adresse _xy_
+1 x y       | `LDA xy`   | copie le mot mémoire d’adresse _xy_ dans le registre A
+2 x y       | `LDB xy`   | copie le mot mémoire d’adresse _xy_ dans le registre B
+3 x y       | `MOV x y`  | copie registre Rx dans Ry (R0: R; R1: A; R2: B)
+4 - -       | **opérations arithmétique et logiques**
+4 0 0       | `ADD`      | ajoute les valeurs des registres A et B, produit le résultat dans R 
+4 0 1       | `SUB`      | soustrait la valeur du registre B à celle du registre A, produit le résultat dans R 
+. . .       | etc        | …
+5 x y       | `JMP x y`  | branche en _xy_ (PC reçoit la valeur _xy_)
+6 x y       | `JPP x y`  | branche en _xy_ si la valeur du registre R est positive
+7 x y       | `JEQ x y`  | saute une case (PC += 2) si la valeur du registre R est égale à _xy_
+8 x y       | `JNE x y`  | saute une case (PC += 2) si la valeur du registre R est différent de _xy_
+
+### Boot et arrêt
+
+La machine démarre avec la valeur nulle comme pointeur d'instruction.
+
+La machine stoppe si le pointeur d'instruction vaut 99.
+
+On peut donc utiliser le mnémonique `HLT` comme synonyme de `JMP 99`.
+
+### Entrées/sorties
+
+Les entrées/sortries sont "mappées" en mémoire.
+
+Écrire le mot mémoire 99 écrit sur le terminal.
+
+Les valeurs saisies sur le terminal seront lues dans le mot mémoire 99.
+
+Exercices
+=========
+
+Question 1
+----------
+
+Q1: Que fait le programme chargé à l'adresse 0 ?
+R1: Il affiche le maximum des deux nombres chargés depuis le clavier.
+
+00: 199; LDA 99  // input A
+01: 299; LDB 99  //
+02: 320; MOV B R // R <- B
+03: 009; STO 09  // Sauvegarde B dans x
+04: 401; SUB
+05: 610; JPP 10  // JMP 10 si R>0, ie si A>B
+06: 310; MOV R A // R <- A
+07: 099; STO 99  // Affiche A
+08: 599; JMP 99  // Halt
+09: 100; ---     // Variable x
+10: 209; LDB 09  // B <- x
+11: 320; MOV B R // R <- B
+12: 099: STO 99  // Affichage B
+13: 599: JMP 99  // Halt
+
+Il y a un bug assez grave dans ce programme car tous les nombres sont
+sur [0-99], mais ça peut suffire à donner l'idée...
+
+Question 2
+----------
+
+Q2: Écrire à partir de la case 20 le programme qui affiche le minimum
+    de deux nombres donnés au clavier.
+R2: C'est pareil, sauf:
+    - 06: MOV 10 devient 26: MOV 20 pour afficher le bon
+    - 03: STO 09 devient 23: STO 29 pour ne pas géner le programme 1
+    
+Question 3
+----------
+
+Q3: Que fait le programme débutant à l'adresse 40 ?
+    Indice: donnez 5 et 2 comme entrées du programme
+    
+R3: Il calcule le produit des deux entrées et affiche le résultat
+
+Question 4
+----------
+
+Q4: Comment faire pour que le programme @40 tienne en 21 cases ?
+R4: Il suffit de stocker x et y dans les cases 40 et 41 car on n'a
+    plus besoin de ce code une fois qu'on l'a exécuté.
+    
+Question 5
+----------
+
+Q5: Comment faire en 20 cases ?
+R5: 099 (STO 99) + 599 (HALT) devient 507 (JMP 07) pour réutiliser la
+    finalisation du premier programme.
+    
+Question 6
+----------
+
+Q6: Comment faire pour que ça marche même si y = 0?
+R6: La boucle devient :
+    LDA y; #LOOP
+    LDB 1;
+    SUB 
+    JNE -1/99
+    JMP fin:
+    LDA tot
+    LDB y
+    ADD
+    STO y
+    JMP #loop
+    
+Ce n'est pas plus long car on n'a plus besoin du LDA tot après la
+boucle. Mais y'a le même problème avec les valeurs négatives...
