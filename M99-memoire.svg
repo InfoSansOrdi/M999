@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="727.44477"
-     inkscape:cy="508.83831"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="745.8496"
+     inkscape:cy="549.29406"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -2568,5 +2568,17 @@
          x="66.716225"
          y="89.582344"
          style="font-size:8.46666622px;stroke-width:0.26458332px">⭑</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:6.61458302px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-265.0527"
+       y="15.510141"
+       id="text1285"
+       transform="rotate(-90)"><tspan
+         sodipodi:role="line"
+         id="tspan1283"
+         x="-265.0527"
+         y="15.510141"
+         style="font-size:2.82222223px;stroke-width:0.26458332px">v190205</tspan></text>
   </g>
 </svg>
