@@ -278,3 +278,18 @@ registre SB (stack base -- initialisé à 98) et les opcodes suivants:
 
 La factorielle pourrait être un exemple pas trop fastidieux à mettre
 en oeuvre pour réutiliser la multiplication vue plus haut.
+
+Pour aller plus loin
+====================
+
+Ceux qui aiment bien ces petits jeux autour de l'assembleur devraient
+regarder du coté des jeux suivants:
+
+ - [Core War](http://www-cs-students.stanford.edu/~blynn/play/redcode.html)
+   où des programmes s'exécutent tous ensemble dans la mémoire d'un
+   ordinateur. Chacun tente de stoper les autres en écrivant dans
+   leur mémoire.
+   
+ - [Human Resource Machine](https://en.wikipedia.org/wiki/Human_Resource_Machine).
+   Un ensemble de défis à résoudre à l'aide de programmes en
+   pseudo-assembleur le plus court possible.
