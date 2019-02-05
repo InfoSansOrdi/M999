@@ -26,10 +26,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70710678"
-     inkscape:cx="745.8496"
-     inkscape:cy="549.29406"
+     inkscape:cx="650.09019"
+     inkscape:cy="597.9976"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1920"
      inkscape:window-height="1019"
@@ -1136,7 +1136,12 @@
          id="tspan1192-2-4"
          x="215.11685"
          y="272.39517"
-         style="text-align:start;text-anchor:start;stroke-width:0.26458332px">Cp Rx dans Ry</tspan></text>
+         style="text-align:start;text-anchor:start;stroke-width:0.26458332px">Copie le registre Rx dans Ry</tspan><tspan
+         sodipodi:role="line"
+         x="215.11685"
+         y="279.00977"
+         style="text-align:start;text-anchor:start;stroke-width:0.26458332px"
+         id="tspan1266">310 (MOV A R) R := A</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:6.61458349px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
