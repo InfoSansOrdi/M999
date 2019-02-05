@@ -225,6 +225,61 @@ commence la première boucle en sautant au milieu, soit on sort de la
 dernière boucle en sautant depuis le milieu. C'est quand même plus
 simple d'utiliser un langage de haut niveau et un compilateur :)
 
+Lien à l'informatique
+=====================
+
+Le M99 est un ordinateur en papier, assez simple à utiliser avec
+seulement un crayon, mais il a été pensé pour être relativement
+réaliste des vrais ordinateurs.
+
+- La mémoire d'un vrai ordinateur est également découpée en mots
+  mémoires, chacun étant doté d'une adresse unique. En général, les
+  vrais ordinateurs utilisent des mots de 1 octet (8 bits). Les
+  ordinateurs 32bits peuvent avoir jusqu'à 2³² mots (soit un peu plus
+  de 4Go de mémoire) tandis que les ordinateurs 64bits peuvent en
+  avoir jusqu'à 2⁶⁴ en théorie (18 Exaoctets, 18.10¹⁸ octets).
+
+- Les vrais processeurs ont également des registres afin de gérer au
+  mieux le problème de la barrière mémoire. Ils ont également des
+  caches pour optimiser les échanges entre la mémoire et le CPU. Là où
+  lire en mémoire peut demander une centaine de cycles CPU, lire en
+  cache prend entre 10 et 30 cycles. Le M99 n'a pas de caches pour
+  simplifier.
+
+- Les vrais programmes sont également écrits sous forme d'opcodes en
+  mémoire des vrais ordinateurs, avec le préfixe indiquant l'opération
+  tandis que le sufixe indique les opérandes.  Le jeu d'opérations
+  élémentaires disponibles varie beaucoup d'un processeur à l'autre. 
+  
+  Pour le M99, nous avons choisi d'utiliser des mots mémoires de trois
+  positions décimales, ce qui contraint fortement le nombre
+  d'instructions disponibles. Ces contraintes sont parfaitement
+  réalistes de celles que doivent résoudre les fabriquants de CPU.
+  Ajouter des instructions simplifie l'écriture de programmes
+  efficaces, mais complique grandement le processeur, qui devient plus
+  cher et plus énergivore.
+
+  Les processeurs de la famille RISC (reduced instruction set CPU)
+  visent la simplicité et n'offrent que peu d'instructions tandis que
+  ceux de la famille CISC (complex instruction set CPU) offrent des
+  opérations optimisées plus rares, comme des opérations vectorielles.
+  
+  Il serait faux de dire que l'une des familles est vraiment
+  préférable à l'autre. Il s'agit plutôt de deux compromis différents
+  entre complexité du processeur et complexité des programmes.  Les
+  processeurs des téléphones portables sont souvent des RISC (par
+  exemple du constructeur ARM) tandis que ceux des ordinateurs sont
+  souvent des CISC (par exemple des constructeurs Intel ou AMD).
+
+- Gérer les entrées/sorties au travers d'adresses particulières de
+  l'espace d'adressage du bus mémoire est parfaitement réaliste. En
+  revanche, il est rare d'avoir plusieurs périphériques à la même
+  adresse et on aurait pu séparer les lectures du clavier et les
+  écritures à l'écran dans des zones mémoire différentes. De plus, 
+  nous avons ignoré toute la synchronisation qu'un vrai processeur
+  doit faire pour échanger avec les périphériques, souvent bien plus
+  lent.
+
 Extensions M999
 ===============
 
