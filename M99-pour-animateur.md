@@ -182,9 +182,11 @@ difficile à lire et à comprendre. On ne fait pas des programmes que
 pour la machine, mais aussi (surtout) pour que d'autres humains les
 comprennent.
 
+```
   56: 310: MOV A R     ->   56: 504: JMP 04
   57: 099: STR 99
   58: 599: HLT
+```
 
 Q3: Corrigez ce programme quand la seconde entrée vaut 0
 --------------------------------------------------------
@@ -201,6 +203,7 @@ La seconde solution est de réécrire le corps de boucle pour faire le
 décrément du compteur avant l'addition au résultat, au prix de légères
 contortions pour sortir de la boucle au bon moment
 
+```
   46: 162: LDA res    ->  46: 162: LDA y
   47: 259: LDB x          47: 261: LDB un
   48: 400: ADD            48: 401: SUB
@@ -213,6 +216,7 @@ contortions pour sortir de la boucle au bon moment
                           55: 546: JMP 46 // Retour début boucle
                           56: 162: LDA res
 			  57: 504: JMP 04 // Utilise la fin du prog 1
+```
 
 L'instruction de la ligne 49 est assez discutable. Son objectif est de
 tester si R==-1, mais on n'a pas de nombres négatifs dans la mémoire.
