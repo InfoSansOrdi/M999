@@ -13,9 +13,8 @@ La mémoire est composée de 100 mots mémoire de 3 chiffres (valeur de
 codées sur 2 chiffres. Cette mémoire va contenir données et instructions.
 
 Le processeur dispose de deux registres généraux nommés A et B, et
-d'un registre accumulateur/résultat nommé R.
-
-Comme la mémoire, ces registres sont de 3 chiffres plus un signe. Ils
+d'un registre accumulateur/résultat nommé R. Ces registres sont de 3
+chiffres, mais au contraire de la mémoire, ils ont un signe. Ils
 peuvent donc contenir des valeurs comprises entre -999 et 999.
 
 Le processeur dispose aussi d'un quatrième registre nommé PC (Program
@@ -36,9 +35,7 @@ B pour les opérandes, R pour le résultat.
 Unité de commande
 -----------------
 
-L'unité de commande pilote l'ordinateur.
-
-Son cycle de fonctionnement comporte 3 étapes :
+L'unité de commande pilote l'ordinateur. Son cycle de fonctionnement comporte 3 étapes :
 
 1. charger l'instruction depuis la case mémoire pointée par PC vers la
    zone dédiée dans l'UAL (la case sous le registre PC).
@@ -52,20 +49,20 @@ Son cycle de fonctionnement comporte 3 étapes :
 Jeu d'instruction
 -----------------
 
-op0 op1 op2 | mnémonique | instruction à réaliser
------------ | ---------- | ----------------------
-0 x y       | `STR xy`   | copie le contenu du registre R dans le mot mémoire d'adresse _xy_
-1 x y       | `LDA xy`   | copie le mot mémoire d’adresse _xy_ dans le registre A
-2 x y       | `LDB xy`   | copie le mot mémoire d’adresse _xy_ dans le registre B
-3 x y       | `MOV x y`  | copie registre Rx dans Ry (R0: R; R1: A; R2: B)
-4 - -       | **opérations arithmétique et logiques**
-4 0 0       | `ADD`      | ajoute les valeurs des registres A et B, produit le résultat dans R 
-4 0 1       | `SUB`      | soustrait la valeur du registre B à celle du registre A, produit le résultat dans R 
-. . .       | etc        | …
-5 x y       | `JMP x y`  | branche en _xy_ (PC reçoit la valeur _xy_)
-6 x y       | `JPP x y`  | branche en _xy_ si la valeur du registre R est positive
-7 x y       | `JEQ x y`  | saute une case (PC += 2) si la valeur du registre R est égale à _xy_
-8 x y       | `JNE x y`  | saute une case (PC += 2) si la valeur du registre R est différent de _xy_
+code  | mnémonique | instruction à réaliser
+----- | ---------- | ----------------------
+0 x y | `STO xy`   | copie le contenu du registre R dans le mot mémoire d'adresse _xy_
+1 x y | `LDA xy`   | copie le mot mémoire d’adresse _xy_ dans le registre A
+2 x y | `LDB xy`   | copie le mot mémoire d’adresse _xy_ dans le registre B
+3 x y | `MOV x y`  | copie registre Rx dans Ry (R0: R; R1: A; R2: B)
+4 - - | **opérations arithmétique et logiques**
+4 0 0 | `ADD`      | ajoute les valeurs des registres A et B, produit le résultat dans R 
+4 0 1 | `SUB`      | soustrait la valeur du registre B à celle du registre A, produit le résultat dans R 
+. . . | etc        | …
+5 x y | `JMP x y`  | branche en _xy_ (PC reçoit la valeur _xy_)
+6 x y | `JPP x y`  | branche en _xy_ si la valeur du registre R est positive
+7 x y | `JEQ x y`  | saute une case (PC += 2) si la valeur du registre R est égale à _xy_
+8 x y | `JNE x y`  | saute une case (PC += 2) si la valeur du registre R est différent de _xy_
 
 ### Boot et arrêt
 
@@ -80,11 +77,8 @@ Les entrées/sortries sont "mappées" en mémoire: Écrire le mot mémoire
 99 écrit sur le terminal, tandis que les valeurs saisies sur le
 terminal seront lues dans le mot mémoire 99.
 
-Exercices
-=========
-
 Exercice 1
-----------
+==========
 
 Objectifs: 
  - prise en main du M99
@@ -92,12 +86,13 @@ Objectifs:
  - comprendre le cycle fetch/decode/execute
 
 Q1: Que fait le programme chargé à l'adresse 0 ?
-................................................
+------------------------------------------------
 
 Pour répondre, il faut appliquer le cycle fetch/decode/exec aux
 données qui sont dans les premières adresses de la mémoire. Traduire
 les valeurs numériques en mémoire est nécessaire.
 
+```
 00: LDA 10  // Charge le contenu de la case 10 dans le registre A
 01: LDB 11  // Charge le contenu de la case 10 dans le registre A
 02: SUB     // R := A - B
@@ -110,12 +105,14 @@ les valeurs numériques en mémoire est nécessaire.
 09: JMO 99  // Arrête le programme
 10: 42      // Utilisé seulement comme une donnée, sans signification 
 11: 123     // Utilisé seulement comme une donnée, sans signification 
+```
 
 Donc au final, ce programme affiche 123, car 42 < 123.
 
 Q2: Que fait le programme débutant à l'adresse 13?
-..................................................
+--------------------------------------------------
 
+```
 13: LDA 99  // Charge une entrée utilisateur dans A
 14: MOV A R // R := A
 15: STR 10  // Copie l'entrée utilisateur en 10
@@ -123,18 +120,20 @@ Q2: Que fait le programme débutant à l'adresse 13?
 17: MOV A R // R := A
 18: STR 11  // Copie l'entrée utilisateur en 11
 19: JMP 0   // Branche l'exécution sur 0
+```
 
 Donc au final, ce programme demande deux entrées à l'utilisateur avant
 d'exécuter le programme précédent (qui affichera le plus grand d'entre
 eux).
 
 Q3: Écrire un programme affichant le minimum de deux entrées clavier
-....................................................................
+--------------------------------------------------------------------
 
 On peut l'écrire à partir de l'adresse 20 en mémoire, et on n'a pas
 besoin d'écrire ce qu'on lit en mémoire puisqu'on l'utilise
 immédiatement.
 
+```
 20: 199; LDA 99  // input A
 21: 299; LDB 99  // input B
 22: 401; SUB
@@ -145,21 +144,22 @@ immédiatement.
 27: 320; MOV A R // Copie A dans R
 28: 099: STO 99  // Affichage A
 29: 599: JMP 99  // Halt
+```
 
 Exercice 2
-----------
+==========
 
 Objectifs:
  - Modifier un programme en assembleur
  - Voir l'intérêt d'un compilateur, et d'un langage de haut niveau
 
 Q1: Que fait le programme débutant à l'adresse 40 (pour les entrées 5 et 2)?
-............................................................................
+----------------------------------------------------------------------------
 
 Il calcule le produit des deux entrées et affiche le résultat
 
 Q2: Peut-on raccourcir ce programme ?
-.....................................
+-------------------------------------
 
 On peut passer à 21 cases en stockant x et y dans les cases 40 et 41
 car on n'a plus besoin de ce code une fois qu'on l'a exécuté.
@@ -187,7 +187,7 @@ comprennent.
   58: 599: HLT
 
 Q3: Corrigez ce programme quand la seconde entrée vaut 0
-........................................................
+--------------------------------------------------------
 
 En effet, notre programme calcule par exemple 5*0 = 5 car il ajoute x
 au résultat dans tous les cas. Pour corriger, il faut d'abord vérifier
@@ -285,8 +285,7 @@ Extensions M999
 
 Deux extensions possibles pour la M99 afin d'en faire un M999 (tout en
 restant compatible avec le M99). Le M99 est un ordinateur en papier,
-le M999 un ordinateur en carton, mais je sais pas de quoi est fait le
-M9 :)
+et le M999 un ordinateur en carton. Le M9 serait-il l'ordinateur-plume?
 
 Registres génériques
 --------------------
@@ -319,6 +318,9 @@ on peut refaire une multiplication qui tienne uniquement en registre,
 et compter le temps que ça prend en considérant que les accès mémoire
 (instructions LDA, LDB et STO) sont 100 fois plus longues que les
 instructions n'utilisant que les registres (toutes les autres).
+
+On peut introduire cette extension en parlant du problème du register
+spilling (où on n'a pas assez de registre pour couvrir les besoin).
 
 Pile et fonctions
 -----------------
