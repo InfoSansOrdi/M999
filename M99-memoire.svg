@@ -14,7 +14,7 @@
    viewBox="0 0 420 297"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="M99-memoire.svg">
   <defs
      id="defs2" />
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70710678"
-     inkscape:cx="399.06728"
-     inkscape:cy="595.16917"
+     inkscape:cx="319.87132"
+     inkscape:cy="592.34074"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -2006,7 +2006,12 @@
          id="tspan1188-7-48-2-3-1"
          x="83.122925"
          y="48.797821"
-         style="letter-spacing:5.29166651px;stroke-width:0.26458332px">123</tspan></text>
+         style="letter-spacing:5.29166651px;stroke-width:0.26458332px">010</tspan><tspan
+         sodipodi:role="line"
+         x="80.477089"
+         y="55.412403"
+         style="letter-spacing:5.29166651px;stroke-width:0.26458332px"
+         id="tspan1267" /></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:6.61458349px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;letter-spacing:5.29166651px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2585,5 +2590,38 @@
          x="-265.0527"
          y="15.510141"
          style="font-size:2.82222223px;stroke-width:0.26458332px">v190205</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:6.61458349px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="43.367706"
+       y="41.552814"
+       id="text1469-32-3"><tspan
+         sodipodi:role="line"
+         id="tspan1467-0-6"
+         x="43.367706"
+         y="41.552814"
+         style="font-size:7.05555534px;stroke-width:0.26458332px">LDA 10</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:6.61458349px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="43.477264"
+       y="61.552814"
+       id="text1469-6-7"><tspan
+         sodipodi:role="line"
+         id="tspan1467-15-5"
+         x="43.477264"
+         y="61.552814"
+         style="font-size:7.05555534px;stroke-width:0.26458332px">LDB 11</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:6.61458349px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="43.5186"
+       y="81.552818"
+       id="text1469-6-5-3"><tspan
+         sodipodi:role="line"
+         id="tspan1467-15-4-5"
+         x="43.5186"
+         y="81.552818"
+         style="font-size:7.05555534px;stroke-width:0.26458332px">SUB</tspan></text>
   </g>
 </svg>
