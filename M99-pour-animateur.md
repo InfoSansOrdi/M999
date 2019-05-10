@@ -340,6 +340,9 @@ registre SB (stack base -- initialisé à 98) et les opcodes suivants:
 La factorielle pourrait être un exemple pas trop fastidieux à mettre
 en oeuvre pour réutiliser la multiplication vue plus haut.
 
+On peut même faire un saut calculé en détournant ces instructions:
+pour sauter à l'adresse stockée dans R2, je fais "PSH R2; RET"
+
 Pour aller plus loin
 ====================
 
