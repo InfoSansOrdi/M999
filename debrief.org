@@ -1,0 +1,15 @@
+* 26 juin 2019
+- Public: 40 profs de collège/lycée en maths/SI, quelques profs du supérieur
+- Animateur Martin
+- Durée: pas assez de temps (15mn)
+- Déroulé: Je n'ai pas assez motivé et ce fut la boucherie
+  - J'ai distribué le matériel M99 et j'ai commencé directement les activités.
+    Ce fut une boucherie : cette activité doit être motivée correctement avant
+    d'être utilisée, surtout avec un public naturellement porté sur les maths.
+  - Je me suis retrouvé à rétropédaler à parler du message profond principal de
+    cette activité (l'universalité de l'ordinateur puisque le prog est une
+    donnée) puis turing-complet puis du cycle fetch-decode-execute qui permet /
+    implémente l'universalité sur les ordis que l'on a avant de revenir à
+    l'activité.
+  - Mais c'était trop tard, je les avais perdu (c'était en fin de séance en
+    plus)
