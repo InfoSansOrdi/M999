@@ -187,6 +187,10 @@ Les valeurs saisies sur le terminal seront lues dans le mot mémoire 99.
 
 ------------------------------------------------------------
 
+# Des outils associés
+
+ * [util-m99](https://github.com/b3/util-m99), un simulateur de M99 écrit en bash.
+
 # Des projets comparables, et autres liens
 
  * [CARDboard Illustrative Aid to Computation](https://www.cs.drexel.edu/~bls96/museum/cardiac.html), un processeur en carton des
@@ -194,4 +198,3 @@ Les valeurs saisies sur le terminal seront lues dans le mot mémoire 99.
    - [Un simulateur en Python de la chose](http://www.pythondiary.com/blog/Oct.15,2014/building-cpu-simulator-python.html).
    - [Une implémentation FPGA](http://www.drdobbs.com/embedded-systems/paper-to-fpga/240155922?pgno=1).
  * [Little Man Computer](https://en.wikipedia.org/wiki/Little_man_computer), un autre processeur en carton d'un autre âge.
-
