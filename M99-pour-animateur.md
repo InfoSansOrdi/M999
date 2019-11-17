@@ -51,7 +51,7 @@ Jeu d'instruction
 
 code  | mnémonique | instruction à réaliser
 ----- | ---------- | ----------------------
-0 x y | `STO xy`   | copie le contenu du registre R dans le mot mémoire d'adresse _xy_
+0 x y | `STR xy`   | copie le contenu du registre R dans le mot mémoire d'adresse _xy_
 1 x y | `LDA xy`   | copie le mot mémoire d’adresse _xy_ dans le registre A
 2 x y | `LDB xy`   | copie le mot mémoire d’adresse _xy_ dans le registre B
 3 x y | `MOV x y`  | copie registre Rx dans Ry (R0: R; R1: A; R2: B)
@@ -139,10 +139,10 @@ immédiatement.
 22: 401; SUB
 23: 610; JPP 10  // JMP 10 si R>0, ie si A>B
 24: 320; MOV B R // Copie B dans R
-25: 099; STO 99  // Affiche B
+25: 099; STR 99  // Affiche B
 26: 599; JMP 99  // Halt
 27: 320; MOV A R // Copie A dans R
-28: 099: STO 99  // Affichage A
+28: 099: STR 99  // Affichage A
 29: 599: JMP 99  // Halt
 ```
 
@@ -320,7 +320,7 @@ MOV x y
 Cette extension permet de parler de la barrière mémoire. Par exemple,
 on peut refaire une multiplication qui tienne uniquement en registre,
 et compter le temps que ça prend en considérant que les accès mémoire
-(instructions LDA, LDB et STO) sont 100 fois plus longues que les
+(instructions LDA, LDB et STR) sont 100 fois plus longues que les
 instructions n'utilisant que les registres (toutes les autres).
 
 On peut introduire cette extension en parlant du problème du register
