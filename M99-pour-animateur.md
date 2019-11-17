@@ -102,7 +102,7 @@ les valeurs numériques en mémoire est nécessaire.
 06: JMP 99  // Arrête le programme
 07: MOV B R // R := A
 08: STR 99  // Copie R en 99, donc affiche R à l'écran
-09: JMO 99  // Arrête le programme
+09: JMP 99  // Arrête le programme
 10: 42      // Utilisé seulement comme une donnée, sans signification 
 11: 123     // Utilisé seulement comme une donnée, sans signification 
 ```
