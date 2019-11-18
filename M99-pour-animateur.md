@@ -94,20 +94,20 @@ les valeurs numériques en mémoire est nécessaire.
 
 ```
 00: LDA 10  // Charge le contenu de la case 10 dans le registre A
-01: LDB 11  // Charge le contenu de la case 10 dans le registre A
+01: LDB 11  // Charge le contenu de la case 11 dans le registre B
 02: SUB     // R := A - B
 03: JPP 7   // Si R > 0 alors PC := 7
-04: MOV A R // R := A
+04: MOV B R // B := A
 05: STR 99  // Copie R en 99, c'est-à-dire, affiche R à l'écran
 06: JMP 99  // Arrête le programme
-07: MOV B R // R := A
+07: MOV A R // A := B
 08: STR 99  // Copie R en 99, donc affiche R à l'écran
-09: JMO 99  // Arrête le programme
-10: 42      // Utilisé seulement comme une donnée, sans signification 
-11: 123     // Utilisé seulement comme une donnée, sans signification 
+09: JMP 99  // Arrête le programme
+10: 123     // Utilisé seulement comme une donnée, sans signification 
+11: 42      // Utilisé seulement comme une donnée, sans signification 
 ```
 
-Donc au final, ce programme affiche 123, car 42 < 123.
+Donc au final, ce programme affiche 123, car 123 > 42.
 
 Q2: Que fait le programme débutant à l'adresse 13?
 --------------------------------------------------
@@ -137,12 +137,12 @@ immédiatement.
 20: 199; LDA 99  // input A
 21: 299; LDB 99  // input B
 22: 401; SUB
-23: 610; JPP 10  // JMP 10 si R>0, ie si A>B
-24: 320; MOV B R // Copie B dans R
-25: 099; STR 99  // Affiche B
+23: 610; JPP 27  // JMP 27 si R>0, ie si A>B
+24: 320; MOV A R // Copie A dans R
+25: 099; STR 99  // Affiche A
 26: 599; JMP 99  // Halt
-27: 320; MOV A R // Copie A dans R
-28: 099: STR 99  // Affichage A
+27: 320; MOV B R // Copie B dans R
+28: 099: STR 99  // Affichage B
 29: 599: JMP 99  // Halt
 ```
 
@@ -215,7 +215,7 @@ contortions pour sortir de la boucle au bon moment
   54: 646: JPP 46         54: 062: STR res
                           55: 546: JMP 46 // Retour début boucle
                           56: 162: LDA res
-			  57: 504: JMP 04 // Utilise la fin du prog 1
+                          57: 504: JMP 04 // Utilise la fin du prog 1
 ```
 
 L'instruction de la ligne 49 est assez discutable. Son objectif est de
@@ -223,7 +223,7 @@ tester si R==-1, mais on n'a pas de nombres négatifs dans la mémoire.
 On suppose donc ici qu'un nombre négatif en registre sera traduit en
 son complément à 100 à l'usage. C'est assez réaliste de ce que font
 les vrais ordinateurs.
-			  
+              
 Au final, les deux solutions sont assez diffiles à relire: soit on
 commence la première boucle en sautant au milieu, soit on sort de la
 dernière boucle en sautant depuis le milieu. C'est quand même plus
