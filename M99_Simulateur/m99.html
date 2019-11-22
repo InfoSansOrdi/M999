@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<!--
+  SIMULATEUR ET ASSEMBLEUR M99
+-->
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8" /> 
+
+	<title>M99</title>
+
+	<!-- JQuery & Lined Textarea -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<link href="css/jquery-linedtextarea.css" rel="stylesheet">
+	<script src="js/jquery-linedtextarea.js"></script>
+
+<style>
+/* Prevent from having scrolling icons in number inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+/* ======= */
+
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.memcell {
+	border: 0;
+}
+
+</style>
+</head>
+<body>
+	<h1>Simulateur M99</h1>
+	<table id="memory">
+		<script>
+		function buildmemory() {
+			var t = document.getElementById('memory');
+			for (var r = 0; r < 10; ++r) {
+				var row = t.insertRow();
+				for (var c = 0; c < 10; ++c) {
+					var pos = c+""+r;
+					var inp = '<input class="memcell" placeholder="???" type="number" min="0" max="999" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" id="mem'+pos+'" tabindex="'+c*10+r+1+'">';
+					var cell = row.insertCell();
+					cell.innerHTML = '<td>'+inp+'</td>';
+				}
+			}
+		}
+
+		buildmemory();
+		</script>
+	</table>
+
+	<h1>Sources</h1>
+	<table style="width:100%;">
+		<tr>
+			<td><textarea id="bin" class="lined" rows="10" placeholder="Binaire"></textarea></td>
+			<td><button id="asm_bin" onclick="asmtobin()">&larr; Compile &larr;</button></td>
+			<td><textarea id="asm_asm" class="lined" rows="10" type="text" placeholder="Assembleur (sans label)"></textarea></td>
+			<td><button id="asm_asm" onclick="this.innerHTML='test'">&larr; Compile &larr;</button></td>
+			<td><textarea id="asm_lbl" class="lined" rows="10" placeholder="Assembleur (avec label)"></textarea></td>
+		</tr>
+	</table>
+
+	<h1>Logs</h1>
+	<p id="log">...</p>
+
+	<script>
+	/**
+	 * Vérifie si une entrée dépasse la longueur max
+	 */
+	function maxLengthCheck(object) {
+		if (object.value.length > object.max.length);
+			object.value = object.value.slice(0, object.max.length);
+	}
+	
+	/**
+	 * Vérifie si une entrée au clavier est un chiffre ou non
+	 */
+	function isNumeric (evt) {
+		var theEvent = evt || window.event;
+		var key = theEvent.keyCode || theEvent.which;
+		key = String.fromCharCode(key);
+		var regex = /[0-9]|\./;
+		if ( !regex.test(key) ) {
+			theEvent.returnValue = false;
+			if(theEvent.preventDefault) theEvent.preventDefault();
+		}
+	}
+	</script>
+
+	<script>
+	// initialise la gestion des numéros de lignes
+	$(document).ready(function(){
+		$(".lined").linedtextarea();
+	});
+	</script>
+
+	<script>
+
+	/**
+	 * Expressions régulières aidant à la compilation
+	 */
+	// Fin de ligne; commentaire
+	var TRAIL = "\\s*(;.*)?";
+	// Nombre
+	var NBR = "([0-9]+)";
+	// ID de label
+	var ID    = "([a-zA-Z][a-zA-Z0-9_]*)";
+	// Instructions
+	var OPC   = "(\\.word|STR|LDA|LDB|MOV|ADD|SUB|JMP|JPP|JEQ|JNE)";
+	// Ligne vide
+	var EMPTY = new RegExp("^"+TRAIL+"$");
+	// Label, ".at *label*"
+	var LABS  = new RegExp("^\\s*\\.at\\s+"+ID+TRAIL+"$");
+	// Adressage direct, ".at X", X = [0,99]
+	var DIREC = new RegExp("^\\s*\\.at\\s+([0-9]+)"+TRAIL+"$");
+	// Instruction
+	var INS   = new RegExp("^\\s*"+OPC +"(\\s+("+ID+"|"+ NBR+"))?"+TRAIL+"$");
+
+	/**
+	 * Tableau de correspondance instruction -> code
+	 */
+	
+	 var insCode = {
+		"STR": "0",
+		"LDA": "1",
+		"LDB": "2",
+		"MOV": "3",
+		"ADD": "4",
+		"SUB": "4",
+		"JMP": "5",
+		"JPP": "6",
+		"JEQ": "7",
+		"JNE": "8"
+	};
+
+	/**
+	 * Passage de l'asm labélisé à l'asm absolu (sans label)
+	 * Résolution des adresses correspondantes aux labels
+	 */
+	function asmtoasm() {
+		// Éléments de la page
+		var sourcetext = document.getElementById('asm_lbl');
+		var src = sourcetext.value.split('\n');
+		var log = document.getElementById('log');
+
+		// Lignes avec labels résolus
+		var out = [];
+		// Liste des labels
+		var lbls = [];
+
+		// Parcours du code
+		for(var nline = 0; nline < src.length; ++nline) {
+			line = srv[nline];
+
+			if (line.match(EMPTY)) {
+				out[nline] = ""
+			} else if (line.match(DIREC)) {
+				out[nline] = src[line];
+			}
+		}
+	}
+
+	/**
+	 * Compilation de l'asm absolu (pas de label) en représentation numérique
+	 * (Récupération des sources depuis la textarea "asm_asm", la traduire et l'écrire dans la textarea "bin")
+	 */
+	function asmtobin() {
+		// Éléments de la page
+		var sourcetext = document.getElementById('asm_asm');
+		var bintext = document.getElementById('bin')
+		var src = sourcetext.value.split('\n');
+		var log = document.getElementById('log');
+
+		// Lignes compilées
+		var out = [];
+
+		// instruction illégale | paramètre incorrect
+		var fatalError = false;
+		// Adresse courante
+		var curAddr = 0;
+
+		log.innerHTML = "Compilation ASM vers ASM...<br>";
+
+		// Parcours du code
+		for(var nline = 0; nline < src.length; ++nline) {
+			var line = src[nline];
+			
+			var lineRegex;
+			if (line.match(EMPTY)) { // ligne vide
+				out[nline] = "";
+			} else if (lineRegex = line.match(DIREC)) { // La ligne est sous la forme ".at xx"
+				addr = parseInt(lineRegex[1]);
+				out[nline] = line;
+				if (addr < 0 || addr > 99) {
+					log.innerHTML += errMessage("asmtoasm", nline+1, "Address hors de la mémoire<br>")
+					fatalError = true;
+				}
+			} else if (line.match(LABS)) { // Les labels sont résolus dans l'autre source ASM 
+				log.innerHTML += errMessage("asmtoasm", nline+1, "Labels interdits ici<br>")
+				fatalError = true;
+			} else if (lineRegex = line.match(INS)) { // La ligne est une instruction
+				var ins = asmtobin_instr(lineRegex);
+				if (ins == "I") {
+					log.innerHTML += errMessage("asmtoasm", nline+1, "Instruction '" + lineRegex[1] + "' non reconnue<br>");
+					fatalError = true;
+				} else if (ins == "T") {
+					log.innerHTML += errMessage("asmtoasm", nline+1, "Trop de paramètre<br>");
+					fatalError = true;
+				}  else if (ins == "M") {
+					log.innerHTML += errMessage("asmtoasm", nline+1, "Pas assez paramètre<br>");
+					fatalError = true;
+				} else {
+					out[nline] = ins;
+				}
+			}
+
+			console.log(lineRegex);
+
+			if (!fatalError)
+				bin.value = out.join("\n");
+			else
+				log.innerHTML = "ASM vers ASM compilé";
+
+		}
+	}
+
+	/**
+	 * Traduction du tableau "instruction" (résultant de l'expression régulière) vers la forme x y z (représentation numérique)
+	 * Retourne "N" si l'instruction n'est pas reconnu, "P" si les paramètres passés sont incorrects 
+	 */
+	function asmtobin_instr(insRegexLin) {
+		if (insRegexLin[1] == "ADD" || insRegexLin[1] == "SUB") { // Instructions sans paramètre
+			if (typeof insRegexLin[2] !== 'undefined')
+				return "T";
+			return insRegexLin[1] == "ADD" ? "4 0 0" : "4 0 1";
+
+		} else if (insRegexLin[1] == "STR" || // Instructions avec paramètre
+				   insRegexLin[1] == "LDA" ||
+				   insRegexLin[1] == "LDB" ||
+				   insRegexLin[1] == "MOV" ||
+				   insRegexLin[1] == "JMP" ||
+				   insRegexLin[1] == "JPP" ||
+				   insRegexLin[1] == "JEQ" ||
+				   insRegexLin[1] == "JNE") {
+			if (typeof insRegexLin[2] === 'undefined') 
+				return "M";
+			return insCode[insRegexLin[1]] + " " + insRegexLin[3][0] + " " + insRegexLin[3][1];
+		}
+
+		// Instruction non reconnue
+		return "I";
+	}
+
+	/**
+	 * Retourne une chaîne de caractère formatée pour les erreurs
+	 */
+	function errMessage(srcArea, nline, msg) {
+		return "Erreur dans " + srcArea + "; ligne " + nline + ": " + msg;
+	}
+	</script>
+</body>
+</html>
