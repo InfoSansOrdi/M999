@@ -64,6 +64,10 @@ code  | mnémonique | instruction à réaliser
 7 x y | `JEQ x y`  | saute une case (PC += 2) si la valeur du registre R est égale à _xy_
 8 x y | `JNE x y`  | saute une case (PC += 2) si la valeur du registre R est différent de _xy_
 
+Notez que pour JEQ et JNE, on a `PC += 2` si la condition est respectée
+car l'opération saute une case (PC++) après l'étape de chargement par
+l'unité de commande (PC++).
+
 ### Boot et arrêt
 
 La machine démarre avec la valeur nulle comme pointeur d'instruction
@@ -356,4 +360,10 @@ regarder du coté des jeux suivants:
    
  - [Human Resource Machine](https://en.wikipedia.org/wiki/Human_Resource_Machine).
    Un ensemble de défis à résoudre à l'aide de programmes en
-   pseudo-assembleur le plus court possible.
+   pseudo-assembleur le plus court possible (payant).
+
+ - [Little Man Computer Battle Tank Game](https://github.com/pddring/cpu-battle-tank)
+   Simulateur de petits tanks à programmer dans un petit
+   assembleur pédagogique. C'est un bel outil, dommage que
+   l'assembleur choisi soit si peu réaliste et qu'il n'y ait pas plus
+   d'exercices à résoudre.
