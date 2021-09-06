@@ -344,6 +344,26 @@ registre SB (stack base -- initialisé à 98) et les opcodes suivants:
 La factorielle pourrait être un exemple pas trop fastidieux à mettre
 en oeuvre pour réutiliser la multiplication vue plus haut.
 
+  FUN: // Début de la fonction
+     POP A // Le paramètre était sur la pile
+     LDB 61 // B := mem[61] = 1
+     SUB
+     JPP #REC // On saute si A > 1
+     MOV B -> R // R := 1
+     RET // postcondition: R=A! car A==1 et R==1
+  REC: // Cas récursif de la fonction
+     PSH R         // On avait R = A-1, donc on pousse le paramètre du cas récursif
+     CALL #FUN // Appel récursif 
+     MOV R -> B // R=(A-1)!, que l'on place dans B
+     MULT // R := A * (A-1)!, donc R := A!
+     RET // postcondition: R=A!
+
+   Appel de fonction:
+     LDA 99 // A := une valeur lue depuis l'entrée
+     PSH A
+     CAL #FUN
+     STR 99 // écrit R (ie, A!) sur la sortie
+
 On peut même faire un saut calculé en détournant ces instructions:
 pour sauter à l'adresse stockée dans R2, je fais "PSH R2; RET"
 
