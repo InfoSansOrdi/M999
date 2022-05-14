@@ -22,7 +22,7 @@ registres génériques (nommés de r0 à r5) et un registre pointeur d'instructi
 PC dénotant la case mémoire de la prochaine instruction à exécuter.
 Les deux premiers registres ne sont pas modifiables : la valeur de r0
 est fixée à 0, et celle de r1 est fixée à 1. Au final, seuls les
-registres r2 à r5 sont disponibles pour le programmeur.
+registres r2 à r5 sont disponibles en écriture pour le programmeur.
 
 Les deux cases mémoires 98 et 99 sont particulières car elles servent
 aux I/O. Les lectures dans la case 98 correspondent à des entrées
@@ -44,15 +44,15 @@ Instr | Mnémonique | Signification
   0   | r0         | Valeur du registre 0 (fixée à 0 par définition)
   1   | r1         | Valeur du registre 1 (fixée à 1 par définition)
   2   | r2         | Valeur du registre 2 (qui change)
-  3   | r3         |
-  4   | r4         |
-  5   | r5         |
+  3   | r3         | Valeur du registre 3 (qui change)
+  4   | r4         | Valeur du registre 4 (qui change)
+  5   | r5         | Valeur du registre 5 (qui change)
   6   | @r2        | Case de la mémoire centrale pointée par r2
-  7   | @r3        |
-  8   | @r4        |
-  9   | @r5        |
+  7   | @r3        | Case de la mémoire centrale pointée par r3
+  8   | @r4        | Case de la mémoire centrale pointée par r4
+  9   | @r5        | Case de la mémoire centrale pointée par r5
 
-Le M999 dispose des 10 instructions suivantes:
+Le M999 dispose des 10 instructions suivantes :
 
 Instr | Mnémonique | Signification
 ----- | ---------- | -------------
