@@ -286,7 +286,7 @@ réaliste des vrais ordinateurs.
   écritures à l'écran dans des zones mémoire différentes. De plus, 
   nous avons ignoré toute la synchronisation qu'un vrai processeur
   doit faire pour échanger avec les périphériques, souvent bien plus
-  lent.
+  lents que lui.
 
 Extensions M999
 ===============
